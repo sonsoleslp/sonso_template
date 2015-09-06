@@ -15,7 +15,7 @@
 
 	<button id="menu"><img id="iconomenu" src="img/menu.png"></button>
 	<nav id="lista">
-		<ul><br><br><br><br><br><br>
+		<ul><br>
 			<li> </li>
 			<li><a href="#home" class="elemento" >Home</a></li>
 			<li><a href="#about" class="elemento">About</a></li>
@@ -28,8 +28,7 @@
 <div id="home" class="seccion">
   <div id="centrado">
     <h1>T  I  T  L  E</h1>
-
-    <a href="#about"><img id="flecha" src="img/arrowdown.png"></a>
+    <h1 id="flechas"><a href="#about"><img id="flecha" src="img/arrowdown.png"></a></h1>
   </div>
 </div>
 <div id="about" class="seccion">
@@ -48,7 +47,7 @@
 
 </div>
 <div id="portfolio" class="seccion">
-  <div class="contenido">
+  <div class="contenido contenido2">
     <h1  id="grande">PORTFOLIO</h1>
 
     <box>
@@ -92,15 +91,15 @@
      <a target="_blanck" href="#"><img class="socialicon" src="icons/yt.png"></a>       
    </social>
       <br><br>
-      <div id="cont">Copyright (C) by Sonsoles López Pernas.</div>
-      <div id="cont">Template available for free for personal/professional use.</div>
+      <div id="cont" class="copy">Copyright (C) by Sonsoles López Pernas.</div>
+      <div id="cont" class="copy">Template available for free for personal/professional use.</div>
    </div>
 
   </div>
 
 </div>
 
-<script>
+<script language="javascript" type="text/javascript">
 
 
 $( document ).ready(function() {
@@ -124,32 +123,40 @@ $( document ).ready(function() {
   $('.seccion').css('min-height',screen.availHeight);
   $('.seccion').css('min-height',window.innerHeight);
      //  $( "h1" ).click(function() { $( "p" ).animate({"margin-left": '+=200'},2000); });
-});
+
 
 
 
 // Wholescreen view of portfolio
-$('.port').click(function(){
-  var imagen = $(this).attr('src');
-  var titul = $(this).attr('titulo');
-  var descc = $(this).attr('descr');
+  $('.port').click(function(){
+    var imagen = $(this).attr('src');
+    var titul = $(this).attr('titulo');
+    var descc = $(this).attr('descr');
+    var llami = "$(\'#vista\').slideUp(function(){$(\'#vista\').remove();});";
+    var customDiv = $('<div id="vista"><button id="menu" class="cur" onClick="'+llami+'"><img id="iconosalir" '
+      +'class="salirr" src="img/close.png"></button><div id="cemt"><div id="cemtin">'
+      +'<h2>'+titul+'</h2>'
+      +'<img id="mues" src="'
+      +imagen+'"><br>'
+      +'<p class="descrip">'+descc+'</p>'
+      // +'<br><button id="cerrar">Close</button>'
+      +'</div></div></div>');
 
-  var customDiv = $('<div id="vista"><button id="menu"><img id="iconomenu" class="salirr" src="img/close.png"></button><div id="cemt"><div id="cemtin">'
-    +'<h2>'+titul+'</h2>'
-    +'<img id="mues" src="'
-    +imagen+'"><br>'
-    +'<p class="descrip">'+descc+'</p>'
-    // +'<br><button id="cerrar">Close</button>'
-    +'</div></div></div>');
+     $('body').append(customDiv);
+     $('#vista').animate({height:'toggle'},350);
+      
+           var dentro = function(){$('#vista').remove()};
+           var llamada = function(){customDiv.slideUp(dentro);};
+
+          // $('#iconosalir').click(llamada);
+           
 
 
-   $('body').append(customDiv);
-   $('#vista').animate({height:'toggle'},350);
-   $('.salirr').click(function(){customDiv.slideUp(function(){$('#vista').remove()});});
-    
-
+  });
 });
-  
+
+
+
 //Checking existing sections
 var lista = [];
 var elementos = $('.elemento');
@@ -166,7 +173,7 @@ for(ind; ind<elementos.length;ind++){
 var thelist = lista;
 
 </script>
-<script src="sonso.js"></script>
+<script type="text/javascript"  src="sonso.js"></script>
 
 
 </body>
